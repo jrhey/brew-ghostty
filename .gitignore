@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Neovim
+nvim/lazy-lock.json
+nvim/.netrwhist
+nvim/spell/
+
+# Backup files
+*.bak.*
+
+# Logs
+*.log

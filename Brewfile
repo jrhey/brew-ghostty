@@ -18,4 +18,4 @@ brew "lazygit"      # Git UI
 brew "tmux"         # Terminal multiplexer
 
 # Fonts
-brew install --cask font-iosevka
+cask "font-iosevka"
