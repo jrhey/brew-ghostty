@@ -9,6 +9,7 @@ Clone this repository and run the install script:
 ```bash
 git clone <your-repo-url> ~/Developer/brew-ghostty
 cd ~/Developer/brew-ghostty
+chmod +x install.sh
 ./install.sh
 ```
 
