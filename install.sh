@@ -102,6 +102,49 @@ setup_symlinks() {
   print_info "Symlink created: ~/.config/nvim -> $SCRIPT_DIR/nvim"
 }
 
+remove_symlinks() {
+  print_info "Removing development symlinks..."
+  
+  # Check if nvim config is a symlink
+  if [ -L "$HOME/.config/nvim" ]; then
+    print_info "Removing symlink: ~/.config/nvim"
+    rm "$HOME/.config/nvim"
+    
+    # Optionally restore from backup
+    echo ""
+    read -p "Would you like to restore from a backup? (y/N): " -n 1 -r
+    echo ""
+    
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      # Find available backups
+      backups=($(find "$HOME/.config" -maxdepth 1 -name "nvim.bak.*" -type d 2>/dev/null | sort -r))
+      
+      if [ ${#backups[@]} -eq 0 ]; then
+        print_warning "No backups found"
+      else
+        print_info "Available backups:"
+        for i in "${!backups[@]}"; do
+          echo "  $((i+1)). ${backups[$i]}"
+        done
+        
+        read -p "Select backup to restore (1-${#backups[@]}): " -r
+        
+        if [[ $REPLY =~ ^[0-9]+$ ]] && [ $REPLY -ge 1 ] && [ $REPLY -le ${#backups[@]} ]; then
+          backup_index=$((REPLY-1))
+          mv "${backups[$backup_index]}" "$HOME/.config/nvim"
+          print_info "Restored from backup: ${backups[$backup_index]}"
+        else
+          print_error "Invalid selection"
+        fi
+      fi
+    else
+      print_info "You can now copy the nvim config manually or run this script with option 3"
+    fi
+  else
+    print_warning "No symlink found at ~/.config/nvim"
+  fi
+}
+
 # Main installation process
 main() {
   print_info "Starting Development Environment Setup"
@@ -121,8 +164,9 @@ main() {
   echo "  2. Install Homebrew packages only"
   echo "  3. Install Neovim config only"
   echo "  4. Setup development symlinks (for working on configs)"
+  echo "  5. Remove development symlinks"
   echo ""
-  read -p "Choose an option (1-4): " -n 1 -r
+  read -p "Choose an option (1-5): " -n 1 -r
   echo ""
   
   case $REPLY in
@@ -139,6 +183,9 @@ main() {
       ;;
     4)
       setup_symlinks
+      ;;
+    5)
+      remove_symlinks
       ;;
     *)
       print_error "Invalid option"

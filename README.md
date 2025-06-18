@@ -66,6 +66,15 @@ If you're actively working on your configs, use option 4 to create symlinks. Thi
 # Choose option 4
 ```
 
+When you're done with development mode, use option 5 to remove the symlinks:
+
+```bash
+./install.sh
+# Choose option 5
+```
+
+This will remove the symlinks and optionally restore your configs from a backup.
+
 ## Backups
 
 The install script automatically creates timestamped backups of your existing configurations before overwriting them. Backups are stored as:
