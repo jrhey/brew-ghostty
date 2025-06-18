@@ -13,6 +13,9 @@ brew "lua-language-server"
 
 # Development tools
 brew "git"
-brew "gh"       # GitHub CLI
-brew "lazygit"  # Git UI
-brew "tmux"     # Terminal multiplexer
+brew "gh"           # GitHub CLI
+brew "lazygit"      # Git UI
+brew "tmux"         # Terminal multiplexer
+
+# Fonts
+brew install --cask font-iosevka
