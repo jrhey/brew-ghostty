@@ -26,6 +26,8 @@ The install script provides several options:
 ```
 .
 ├── Brewfile        # Homebrew packages
+├── config/         # Application configurations
+│   └── ghostty     # Ghostty terminal configuration
 ├── install.sh      # Installation script
 ├── nvim/           # Neovim configuration
 │   ├── init.lua
@@ -35,6 +37,14 @@ The install script provides several options:
 │   └── ...
 └── README.md       # This file
 ```
+
+## Ghostty Configuration
+
+The Ghostty terminal configuration is located in `config/ghostty/`. To apply it:
+
+1. Open Ghostty
+2. Press `⌘,` (Command + comma) to open the configuration file
+3. Copy the contents of `config/ghostty/ghostty.config` and paste it into the opened configuration file
 
 ## Updating
 
